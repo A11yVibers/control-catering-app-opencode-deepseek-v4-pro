@@ -1,0 +1,21 @@
+{
+  "name": "control-catering-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Homemade food catering service — browse daily menus, order for pickup, and receive an invoice.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8"
+  }
+}
