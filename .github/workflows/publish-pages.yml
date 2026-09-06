@@ -18,10 +18,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         if: ${{ hashFiles('package.json') != '' }}
         with:
           node-version: 22
@@ -41,6 +41,13 @@ jobs:
               fi
             elif [[ -f package-lock.json ]]; then
               npm ci
+              # npm lockfiles generated on another OS can omit Rollup's
+              # platform-specific optional package (npm/cli#4828).
+              if ! node -e "require('rollup')" >/dev/null 2>&1; then
+                echo "Rollup native package is missing; reinstalling dependencies"
+                rm -rf node_modules package-lock.json
+                npm install
+              fi
               npm run build --if-present
             else
               npm install
